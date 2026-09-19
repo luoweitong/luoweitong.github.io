@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>花境装置 · 办公园区</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+      background: #cfcad4;
+    }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; }
+
+    .card {
+      position: fixed;
+      z-index: 10;
+      color: #3d3a44;
+      user-select: none;
+    }
+    #time-panel { position:fixed; top:22px; right:24px; width:290px; padding:20px 22px 17px;
+      border-radius:22px; background:rgba(249,248,243,.92); border:1px solid rgba(255,255,255,.8);
+      box-shadow:0 12px 36px #26383118; color:#293d39; z-index:10; }
+    .time-heading { display:flex; justify-content:space-between; align-items:center; }
+    .eyebrow { font-size:10px; letter-spacing:2px; color:#7c8a82; }
+    #hour-label { font-size:34px; font-weight:400; letter-spacing:-1px; font-variant-numeric:tabular-nums; }
+    #day-caption { font-size:11px; color:#78847d; margin:7px 0 18px; letter-spacing:.6px; }
+    #day-hour { width:100%; height:7px; appearance:none; border-radius:9px;
+      background:linear-gradient(90deg,#243652 0%,#be9cb6 24%,#f2c578 34%,#e4e7c4 50%,#efb684 74%,#243652 100%); cursor:pointer; }
+    #day-hour::-webkit-slider-thumb { appearance:none; width:18px; height:18px; border-radius:50%; background:#fff; border:3px solid #758d7e; box-shadow:0 2px 5px #0003; }
+    .time-ticks { display:flex; justify-content:space-between; font-size:9px; color:#91988d; margin:8px 0 17px; }
+    .presets { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
+    .presets button,#day-play { border:1px solid #d9dfd5; background:transparent; border-radius:10px; padding:7px 0; color:#52655b; cursor:pointer; font-size:11px; }
+    .presets button[aria-pressed=true],#day-play[aria-pressed=true] { background:#4e6c5c; color:#fff; border-color:#4e6c5c; }
+    .time-footer { display:flex; align-items:center; justify-content:space-between; margin-top:13px; font-size:10px; color:#819085; }
+    #day-play { padding:6px 12px; } #quality { border:0; background:transparent; color:#52655b; font-size:11px; }
+    button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid #527b6d; outline-offset:4px; }
+    body[data-night=true] #title h1,body[data-night=true] #title p { color:#f4e9d7; text-shadow:0 2px 12px #0008; }
+    @media(max-width:700px) { #time-panel { top:80px; right:12px; width:218px; padding:12px 15px; } #hour-label {font-size:26px;} #day-caption {margin:5px 0 10px;} .time-ticks {margin-bottom:10px;} #toolbar button {padding:7px 10px;font-size:11px;} }
+    #title {
+      top: 22px; left: 26px;
+      pointer-events: none;
+    }
+    #title h1 {
+      font-size: 20px; font-weight: 600; letter-spacing: 2px;
+      color: #45404e;
+    }
+    #title p {
+      margin-top: 5px; font-size: 12px; letter-spacing: 1px;
+      color: #7d7887;
+    }
+    #toolbar {
+      bottom: 22px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; width: max-content; max-width: 95vw;
+    }
+    #toolbar button {
+      appearance: none;
+      border: 1px solid rgba(70, 64, 82, 0.25);
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(8px);
+      color: #45404e;
+      font-size: 13px;
+      letter-spacing: 1px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    #toolbar button:focus-visible { outline: 3px solid #367b94; outline-offset: 3px; }
+    @media (max-width: 900px) { #hint { display: none; } }
+    #toolbar button:hover { background: rgba(255,255,255,0.9); }
+    #toolbar button.active {
+      background: #5a5468; color: #fff; border-color: #5a5468;
+    }
+    #hint {
+      bottom: 24px; right: 26px;
+      font-size: 12px; color: #8b8695; letter-spacing: 0.5px;
+      pointer-events: none;
+      text-align: right; line-height: 1.7;
+    }
+    #loader {
+      position: fixed; inset: 0; z-index: 100;
+      background: #dcd7e0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 18px;
+      transition: opacity .6s ease;
+      color: #5a5468;
+    }
+    #loader.hide { opacity: 0; pointer-events: none; }
+    #loader .ring {
+      width: 46px; height: 46px;
+      border: 3px solid rgba(90, 84, 104, 0.2);
+      border-top-color: #5a5468;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    #loader .label { font-size: 14px; letter-spacing: 3px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+  <script type="module" crossorigin src="./assets/index-Bw-wQQZ0.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="title" class="card">
+    <h1>花境装置 · 办公园区</h1>
+    <p>GARDEN &amp; WORKPLACE — CAMPUS LIFE</p>
+  </div>
+
+  <section id="time-panel" aria-label="一天的时光">
+    <div class="time-heading"><span class="eyebrow">A DAY IN THE GARDEN</span><output id="hour-label" for="day-hour">09:00</output></div>
+    <p id="day-caption">晨光初醒 · 花园漫步</p>
+    <input id="day-hour" type="range" min="0" max="23.99" step="0.01" value="9" aria-label="一天的时间" />
+    <div class="time-ticks"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+    <div class="presets"><button data-hour="7" aria-pressed="false">早晨</button><button data-hour="12" aria-pressed="false">正午</button><button data-hour="17.5" aria-pressed="false">傍晚</button><button data-hour="22" aria-pressed="false">夜晚</button></div>
+    <div class="time-footer"><button id="day-play" aria-pressed="false">时光流动</button><label>画质 <select id="quality"><option value="auto">自适应</option><option value="fine">精细</option><option value="fast">流畅</option></select></label></div>
+  </section>
+  <output id="performance-stats" hidden></output>
+  <div id="toolbar" class="card">
+    <button id="btn-rotate">自动环绕</button>
+    <button id="btn-reset">花园全景</button>
+    <button id="btn-close">装置近景</button>
+    <button id="btn-district">街区鸟瞰</button>
+    <button id="btn-office">办公入口</button>
+    <button id="btn-pause" aria-pressed="false">暂停场景</button>
+  </div>
+
+  <div id="hint" class="card">
+    左键拖拽 环绕 · 滚轮 缩放 · 右键 平移
+  </div>
+
+  <div id="loader">
+    <div class="ring"></div>
+    <div class="label" id="loader-label">正在构建微缩景观 …</div>
+  </div>
+
+</body>
+</html>
