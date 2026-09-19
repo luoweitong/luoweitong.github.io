@@ -1,17 +1,27 @@
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('portfolio-theme');
+if (savedTheme === 'dark' || savedTheme === 'light') root.dataset.theme = savedTheme;
+
+document.querySelector('#theme-toggle').addEventListener('click', () => {
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  root.dataset.theme = next;
+  localStorage.setItem('portfolio-theme', next);
+});
+
+document.querySelector('#menu-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('menu-open');
+});
+
+const navLinks = [...document.querySelectorAll('nav a')];
+navLinks.forEach((link) => link.addEventListener('click', () => {
+  document.body.classList.remove('menu-open');
+}));
+
+const sections = [...document.querySelectorAll('main section[id]')];
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
+    if (!entry.isIntersecting) return;
+    navLinks.forEach((link) => link.classList.toggle('active', link.hash === `#${entry.target.id}`));
   });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.project, .research-title, .research-body, .about-intro, .facts, .experience-grid')
-  .forEach((element) => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(24px)';
-    element.style.transition = 'opacity .7s ease, transform .7s ease';
-    observer.observe(element);
-  });
-
-const style = document.createElement('style');
-style.textContent = '.visible{opacity:1!important;transform:none!important}';
-document.head.append(style);
+}, { rootMargin: '-25% 0px -65% 0px' });
+sections.forEach((section) => observer.observe(section));

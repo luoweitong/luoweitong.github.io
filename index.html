@@ -1,140 +1,147 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="罗炜桐｜园林、空间智能与城市公共空间研究作品" />
+    <meta name="theme-color" content="#f7f7f5" />
     <title>罗炜桐｜空间智能作品集</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="grain" aria-hidden="true"></div>
-    <header class="topbar">
-      <a class="monogram" href="#top" aria-label="返回首页">LWT</a>
-      <nav aria-label="页面导航">
-        <a href="#projects">项目</a>
-        <a href="#research">研究方向</a>
-        <a href="#about">关于我</a>
+    <aside class="sidebar">
+      <a class="profile" href="#home" aria-label="返回首页">
+        <span class="avatar"><i></i><b>LW</b></span>
+        <strong>罗炜桐</strong>
+        <small>Landscape × Spatial Intelligence</small>
+      </a>
+
+      <nav aria-label="网站导航">
+        <a class="active" href="#home"><span>⌂</span>首页</a>
+        <a href="#projects"><span>▦</span>项目</a>
+        <a href="#research"><span>◇</span>研究方向</a>
+        <a href="#about"><span>○</span>关于我</a>
       </nav>
-      <a class="github-link" href="https://github.com/luoweitong" target="_blank" rel="noreferrer">GitHub ↗</a>
-    </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-orbit" aria-hidden="true">
-          <span></span><span></span><span></span>
+      <div class="sidebar-bottom">
+        <a href="https://github.com/luoweitong" target="_blank" rel="noreferrer" aria-label="GitHub">GH</a>
+        <button id="theme-toggle" type="button" aria-label="切换深浅色模式">◐</button>
+      </div>
+    </aside>
+
+    <main id="home">
+      <header class="mobile-header">
+        <a href="#home">罗炜桐</a>
+        <button id="menu-toggle" type="button" aria-label="打开导航">☰</button>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">WELCOME TO MY FIELD NOTES</p>
+        <h1>你好，我是罗炜桐。</h1>
+        <p class="intro-copy">华南农业大学园林专业本科生，关注城市公共空间数字建模、空间智能与 AI 交互。我希望把园林设计中的场地经验，转化为能够被计算、验证并服务真实人群的空间方法。</p>
+        <div class="intro-meta">
+          <span>综合排名 <b>7 / 96</b></span>
+          <span>绩点 <b>4.19 / 5.00</b></span>
+          <span>方向 <b>空间智能与城市治理</b></span>
         </div>
-        <p class="kicker reveal">LANDSCAPE × SPATIAL INTELLIGENCE</p>
-        <h1 class="reveal delay-1">从理解一处场地，<br />到让空间<span>能够回应人</span>。</h1>
-        <div class="hero-bottom reveal delay-2">
-          <p class="lead">我是罗炜桐，华南农业大学园林专业本科生。关注城市公共空间数字建模、空间智能与 AI 交互，希望让设计经验转化为可以分析、验证和服务真实人群的空间方法。</p>
-          <div class="identity">
-            <strong>罗炜桐</strong>
-            <span>华南农业大学 · 园林专业</span>
-            <span>综合排名 7 / 96</span>
-          </div>
-        </div>
-        <a class="scroll-cue" href="#projects">探索项目 <i>↓</i></a>
       </section>
 
-      <section class="projects" id="projects">
-        <header class="section-heading">
-          <span>01 / SELECTED WORK</span>
-          <h2>两个空间实验</h2>
-          <p>从游客的一句话，到一条可行路线；从落地装置，到一个会随时间变化的数字场景。</p>
-        </header>
+      <section class="content-section" id="projects">
+        <div class="section-title">
+          <div><span>SELECTED WORK</span><h2>核心项目</h2></div>
+          <p>空间问题、数字方法与交互原型</p>
+        </div>
 
-        <article class="project project-huangpu">
-          <a class="project-visual" href="./huangpu/" target="_blank" aria-label="进入黄埔公园空间智能导览">
+        <a class="post-card" href="./huangpu/" target="_blank" aria-label="打开黄埔公园 AI 游园与三维导览项目">
+          <figure>
             <img src="./huangpu/maps/huangpu-perspective.png" alt="黄埔公园空间效果图" />
-            <span class="project-number">01</span>
-            <span class="launch">进入在线体验 ↗</span>
-          </a>
-          <div class="project-copy">
-            <p class="project-type">空间智能 · 路线计算 · 三维交互</p>
+            <span class="open-mark">↗</span>
+          </figure>
+          <article>
+            <div class="post-date">2026 · SPATIAL INTELLIGENCE</div>
             <h3>黄埔公园 AI 游园与三维导览</h3>
-            <p>将“带老人慢慢走、想看水景”等自然语言需求转化为游览时长、无障碍和景观偏好等空间约束，再由道路网络计算路线，实现二维地图与手机端三维预演联动。</p>
-            <ul>
-              <li><b>问题</b><span>公共空间如何回应不同人群的游览需求？</span></li>
-              <li><b>方法</b><span>需求解析、道路图建模、约束路线规划、太阳位置模拟</span></li>
-              <li><b>工具</b><span>TypeScript · React · Three.js · LLM API</span></li>
-            </ul>
-            <a class="text-link" href="./huangpu/" target="_blank">打开项目 <span>→</span></a>
-          </div>
-        </article>
+            <p>将“带老人慢慢走、想看水景”等自然语言需求转化为时间、无障碍与景观偏好等空间约束，再由道路网络生成可行路线，实现二维地图与手机端三维预演联动。</p>
+            <div class="tags"><span>道路图建模</span><span>约束路线</span><span>Three.js</span><span>AI 交互</span></div>
+            <footer><span>在线交互原型</span><b>进入项目 →</b></footer>
+          </article>
+        </a>
 
-        <article class="project project-garden">
-          <a class="project-visual" href="./garden/" target="_blank" aria-label="进入花境装置三维场景">
+        <a class="post-card" href="./garden/" target="_blank" aria-label="打开花境装置交互式三维场景项目">
+          <figure>
             <img src="./assets/garden-preview.png" alt="花境装置交互式三维场景" />
-            <span class="project-number">02</span>
-            <span class="launch">进入在线体验 ↗</span>
-          </a>
-          <div class="project-copy">
-            <p class="project-type">实体建造 · 程序化景观 · 虚拟仿真</p>
+            <span class="open-mark">↗</span>
+          </figure>
+          <article>
+            <div class="post-date">2026 · VIRTUAL SIMULATION</div>
             <h3>花境装置 · 交互式三维场景</h3>
-            <p>把已落地的花境装置从 SketchUp / OBJ 设计模型转化为网页端实时场景，并加入程序化植物、昼夜光照、人物活动与园区环境，连接实体建造和数字体验。</p>
-            <ul>
-              <li><b>起点</b><span>景观艺术装置设计与施工落地</span></li>
-              <li><b>方法</b><span>模型转换、程序化植物、行为动画、实时光照与性能优化</span></li>
-              <li><b>工具</b><span>Three.js · JavaScript · GLB · Meshopt</span></li>
-            </ul>
-            <a class="text-link" href="./garden/" target="_blank">打开项目 <span>→</span></a>
-          </div>
-        </article>
+            <p>从已落地的花境装置出发，将 SketchUp / OBJ 设计模型转化为网页端实时场景，加入程序化植物、昼夜光照、人物活动与办公园区环境。</p>
+            <div class="tags"><span>实体建造</span><span>程序化景观</span><span>实时光照</span><span>Three.js</span></div>
+            <footer><span>模型已优化至约 11 MB</span><b>进入项目 →</b></footer>
+          </article>
+        </a>
       </section>
 
-      <section class="research" id="research">
-        <div class="research-title">
-          <span>02 / RESEARCH DIRECTION</span>
-          <h2>我想研究的，<br />不只是一个三维模型。</h2>
+      <section class="content-section research" id="research">
+        <div class="section-title">
+          <div><span>RESEARCH INTERESTS</span><h2>研究方向</h2></div>
+          <p>从公共空间出发的技术探索</p>
         </div>
-        <div class="research-body">
-          <p class="statement">我希望从公园等城市公共空间切入，研究如何融合场地、环境与使用行为数据，让数字空间进一步支持规划、公共服务与治理决策。</p>
-          <ol>
-            <li><span>01</span><div><h3>城市公共空间数字建模</h3><p>把道路、设施、植物与活动转化为可计算、可更新的空间信息。</p></div></li>
-            <li><span>02</span><div><h3>差异化人群的空间智能服务</h3><p>关注适老化、亲子与无障碍需求，建立可解释的空间推荐方法。</p></div></li>
-            <li><span>03</span><div><h3>从虚拟表达走向真实验证</h3><p>结合 GIS、实地调查和使用者反馈，检验数字原型是否真正改善体验。</p></div></li>
-          </ol>
+        <div class="note-grid">
+          <article><b>01</b><h3>城市公共空间数字建模</h3><p>把道路、设施、植物和活动转化为可计算、可更新的空间信息。</p></article>
+          <article><b>02</b><h3>差异化人群的智能服务</h3><p>关注适老化、亲子和无障碍需求，建立可解释的空间推荐方法。</p></article>
+          <article><b>03</b><h3>从虚拟表达走向真实验证</h3><p>结合 GIS、实地调查和使用者反馈，检验数字原型是否改善体验。</p></article>
         </div>
+        <blockquote>“我想研究的，不只是一个三维模型，而是数字空间如何进一步支持规划、公共服务与治理决策。”</blockquote>
       </section>
 
-      <section class="about" id="about">
-        <div class="about-intro">
-          <span>03 / ABOUT</span>
-          <h2>设计训练是我的起点，<br />空间智能是下一步。</h2>
+      <section class="content-section about" id="about">
+        <div class="section-title">
+          <div><span>ABOUT ME</span><h2>关于我</h2></div>
+          <p>设计训练是起点，空间智能是下一步</p>
         </div>
-        <div class="facts">
-          <div><b>4.19 / 5.00</b><span>本科绩点</span></div>
-          <div><b>7 / 96</b><span>综合排名</span></div>
-          <div><b>2×</b><span>校二等奖学金</span></div>
-        </div>
-        <div class="experience-grid">
-          <div>
-            <h3>研究与实践</h3>
-            <p>广州森林城市供需评价与布局优化 · 校级大创</p>
-            <p>广州市城市规划勘测设计研究院 · 景观设计实习</p>
-            <p>粤港澳大湾区自然教育发展中心 · 自然教育运营</p>
-          </div>
-          <div>
-            <h3>设计与建造</h3>
+        <div class="about-grid">
+          <article>
+            <h3>教育与研究</h3>
+            <p><b>华南农业大学</b><br />林学与风景园林学院 · 园林专业</p>
+            <p>校级大创：基于多源数据分析的广州森林城市供需评价与布局优化研究</p>
+          </article>
+          <article>
+            <h3>设计与实践</h3>
             <p>全国大学生花园设计建造大赛 · 二等奖</p>
-            <p>德阳市花月季展景观艺术装置设计大赛 · 创新概念奖</p>
+            <p>德阳市花月季展大学生景观艺术装置设计大赛 · 创新概念奖</p>
+            <p>广州市城市规划勘测设计研究院 · 景观设计实习</p>
+          </article>
+          <article>
+            <h3>工具与方法</h3>
             <p>AutoCAD · Rhino · SketchUp · Enscape · V-Ray</p>
-          </div>
-          <div>
-            <h3>数字原型</h3>
             <p>Three.js · JavaScript / TypeScript · React</p>
-            <p>道路图建模 · 三维场景 · AI API 接入</p>
-            <p>持续学习 GIS、Python 与空间数据分析</p>
-          </div>
+            <p>道路图建模 · 三维交互 · AI API 接入</p>
+          </article>
         </div>
       </section>
+
+      <footer class="site-footer">
+        <span>© 2026 罗炜桐</span>
+        <span>Landscape · Spatial Intelligence · Public Space</span>
+      </footer>
     </main>
 
-    <footer>
-      <p>罗炜桐 · Landscape & Spatial Intelligence</p>
-      <a href="#top">回到顶部 ↑</a>
-    </footer>
+    <aside class="right-rail">
+      <section>
+        <h2>研究关键词</h2>
+        <div class="cloud"><span>空间智能</span><span>公共空间</span><span>数字建模</span><span>智慧公园</span><span>GIS</span><span>人机交互</span><span>虚拟仿真</span></div>
+      </section>
+      <section>
+        <h2>当前关注</h2>
+        <a href="#projects"><b>01</b><span>游客需求如何转化为空间约束？</span></a>
+        <a href="#research"><b>02</b><span>数字场景如何服务公共空间治理？</span></a>
+        <a href="#about"><b>03</b><span>从园林设计走向空间数据分析</span></a>
+      </section>
+      <section class="status">
+        <i></i><span>正在学习 GIS、Python 与空间数据分析</span>
+      </section>
+    </aside>
+
     <script src="./script.js"></script>
   </body>
 </html>
