@@ -92,6 +92,11 @@ blockquote { margin: 30px 0 0; padding: 23px 26px; border-left: 3px solid var(--
 .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .about-grid h3 { font: 400 20px var(--display); padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .about-grid p { color: var(--muted); font-size: 12px; }
+.about-callout { display:flex; align-items:center; justify-content:space-between; gap:30px; padding:28px 30px; background:var(--panel); border:1px solid var(--line); border-radius:11px; }
+.about-callout h3 { margin:0 0 8px; font:400 22px var(--display); }
+.about-callout p { margin:0; color:var(--muted); font-size:12px; }
+.about-callout > a { flex:none; padding:11px 17px; color:white; background:var(--accent); border-radius:7px; font-size:11px; transition:transform .2s, filter .2s; }
+.about-callout > a:hover { transform:translateY(-2px); filter:brightness(1.08); }
 .site-footer { padding: 38px 42px 55px; display: flex; justify-content: space-between; color: var(--muted); font-size: 10px; }
 .right-rail { position: fixed; right: 0; top: 0; width: 300px; height: 100vh; padding: 68px 28px; border-left: 1px solid var(--line); background: color-mix(in srgb, var(--bg), var(--panel) 40%); overflow-y: auto; }
 .right-rail section { margin-bottom: 45px; }
@@ -112,6 +117,6 @@ blockquote { margin: 30px 0 0; padding: 23px 26px; border-left: 3px solid var(--
   .intro { padding: 58px 22px 45px; }.content-section { padding: 48px 20px; }
   .section-title { align-items: start; }.section-title > p { display: none; }
   .post-card { grid-template-columns: 1fr; }.post-card figure { min-height: 220px; aspect-ratio: 16/9; }.post-card article { padding: 23px; }
-  .work-grid, .note-grid, .about-grid { grid-template-columns: 1fr; }.site-footer { padding-inline: 20px; gap: 20px; }
+  .work-grid, .note-grid, .about-grid { grid-template-columns: 1fr; }.about-callout { align-items:flex-start; flex-direction:column; }.site-footer { padding-inline: 20px; gap: 20px; }
 }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; transition: none !important; } }
